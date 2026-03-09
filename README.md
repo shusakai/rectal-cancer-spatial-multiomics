@@ -26,7 +26,13 @@ bicrc-spatial-analysis/
 │   ├── 03_tumor_analysis.ipynb             # Tumor subclustering and pathway scoring
 │   ├── 04_spatial_neighborhood_analysis.ipynb  # Squidpy, SKNY, LIANA
 │   ├── 05_temporal_dynamics.ipynb           # Temporal dynamics analysis
-│   └── 06_survival_analysis.ipynb          # KM curves, KRAS, TCGA validation
+│   ├── 06_survival_analysis.ipynb          # KM curves, KRAS, TCGA validation
+│   ├── 07_caf_trajectory.ipynb             # CAF STORIES trajectory & fate (stories-rsc-cuda126)
+│   ├── 08_tumor_trajectory.ipynb           # Tumor STORIES trajectory (stories-rsc-cuda126)
+│   ├── 09_skny_gridding.ipynb              # SKNY gridding & distance calculation (skny)
+│   ├── 10_caf_spatial_distribution.ipynb   # NR CAF spatial distribution & DEG (skny)
+│   ├── 11_tumor_neighbor_analysis.ipynb    # CAF neighbor DEG & pathway (skny)
+│   └── 12_ligand_receptor_analysis.ipynb   # Ligand-receptor interaction (skny)
 ├── data/                                   # Input h5ad files and metadata (not tracked)
 ├── results/                                # CSV outputs from analyses
 ├── figures/                                # Publication-ready figures
@@ -74,6 +80,40 @@ GPU-accelerated subclustering (rapids_singlecell) and Wilcoxon DEG analysis for:
 - KRAS mutation stratification
 - TCGA rectal cancer validation (POSTN TPM, KRAS mutation)
 
+### 07 — CAF Trajectory *(conda: stories-rsc-cuda126)*
+- STORIES SpaceTime model fitting for CAF trajectory analysis
+- CellRank fate probability (NR CAF vs CR CAF)
+- Spatial fate mapping and DEG analysis (high vs low fate probability)
+- Velocity-based branch analysis with driver gene trends
+- TF enrichment (TRRUST)
+
+### 08 — Tumor Trajectory *(conda: stories-rsc-cuda126)*
+- STORIES SpaceTime model for epithelial-to-malignant trajectory
+- Potential and velocity computation
+- Driver gene analysis and TF enrichment
+
+### 09 — SKNY Gridding *(conda: skny)*
+- 10μm spatial gridding per sample using SKNY/stlearn
+- Distance calculation from tumor surface (Dijkstra shortest path on contour graph)
+- Per-sample h5ad output with distance annotations
+
+### 10 — CAF Spatial Distribution *(conda: skny)*
+- NR CAF proportion comparison: peri-tumor vs peri-normal regions
+- Wilcoxon signed-rank test with paired violin plots
+- DEG analysis: NR CAF vs Normal Fibroblast
+- Reactome pathway enrichment
+
+### 11 — Tumor Neighbor Analysis *(conda: skny)*
+- CAF-adjacent tumor cell identification (Delaunay spatial graph)
+- Per-cell pathway enrichment (MSigDB Hallmark)
+- DEG and volcano plots for NR/CR/Other CAF neighbors
+- Per-patient pathway analysis and non-canonical WNT analysis
+
+### 12 — Ligand-Receptor Analysis *(conda: skny)*
+- Squidpy ligrec and stlearn CCI analysis
+- Per-patient LR interaction analysis (WNT, TGF-β, TNF, NOTCH, Hedgehog, VEGF)
+- FDR correction (Benjamini-Hochberg) and heatmap visualization
+
 ## Installation
 
 ```bash
@@ -108,6 +148,18 @@ The following input files are expected in the `data/` directory:
 | `tcga_kras_colon_rect.tsv` | TCGA KRAS mutation status |
 | `cell_area.txt` | Tissue area (μm²) per sample |
 | `cell_count.txt` | Total cell count per sample |
+| `6-1_epithelial.h5ad` | Epithelial cell subset (Notebook 08) |
+| `tumor_bed_pt22.csv` | Tumor bed annotation for Pt-22 (Notebook 07) |
+| `tumor_bed_pt24.csv` | Tumor bed annotation for Pt-24 (Notebook 07) |
+| `trrust_rawdata.human.tsv` | TRRUST TF-target database (Notebooks 07, 08) |
+
+## Conda Environments
+
+| Environment | Notebooks | Key Packages |
+|-------------|-----------|--------------|
+| `bicrc-spatial` | 01–06 | scanpy, squidpy, rapids_singlecell, gseapy, liana, lifelines |
+| `stories-rsc-cuda126` | 07–08 | stories, cellrank, rapids_singlecell, jax, optax |
+| `skny` | 09–12 | skny, stlearn, squidpy, gseapy, OpenCV |
 
 ## Key Dependencies
 
@@ -117,3 +169,7 @@ The following input files are expected in the `data/` directory:
 - **gseapy**: Pathway scoring via Enrichr
 - **liana**: Ligand-receptor interaction analysis
 - **lifelines**: Kaplan-Meier survival analysis
+- **stories**: SpaceTime optimal transport trajectory inference (requires JAX)
+- **cellrank**: Fate probability and lineage analysis
+- **skny / stlearn**: Spatial gridding and cell-cell interaction
+- **OpenCV (cv2)**: Contour detection for distance calculation
