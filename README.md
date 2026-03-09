@@ -28,7 +28,6 @@ bicrc-spatial-analysis/
 │   ├── 05_temporal_dynamics.ipynb           # Temporal dynamics analysis
 │   ├── 06_survival_analysis.ipynb          # KM curves, KRAS, TCGA validation
 │   ├── 07_caf_trajectory.ipynb             # CAF STORIES trajectory & fate (stories-rsc-cuda126)
-│   ├── 08_tumor_trajectory.ipynb           # Tumor STORIES trajectory (stories-rsc-cuda126)
 │   ├── 09_skny_gridding.ipynb              # SKNY gridding & distance calculation (skny)
 │   ├── 10_caf_spatial_distribution.ipynb   # NR CAF spatial distribution & DEG (skny)
 │   ├── 11_tumor_neighbor_analysis.ipynb    # CAF neighbor DEG & pathway (skny)
@@ -87,11 +86,6 @@ GPU-accelerated subclustering (rapids_singlecell) and Wilcoxon DEG analysis for:
 - Velocity-based branch analysis with driver gene trends
 - TF enrichment (TRRUST)
 
-### 08 — Tumor Trajectory *(conda: stories-rsc-cuda126)*
-- STORIES SpaceTime model for epithelial-to-malignant trajectory
-- Potential and velocity computation
-- Driver gene analysis and TF enrichment
-
 ### 09 — SKNY Gridding *(conda: skny)*
 - 10μm spatial gridding per sample using SKNY/stlearn
 - Distance calculation from tumor surface (Dijkstra shortest path on contour graph)
@@ -148,17 +142,16 @@ The following input files are expected in the `data/` directory:
 | `tcga_kras_colon_rect.tsv` | TCGA KRAS mutation status |
 | `cell_area.txt` | Tissue area (μm²) per sample |
 | `cell_count.txt` | Total cell count per sample |
-| `6-1_epithelial.h5ad` | Epithelial cell subset (Notebook 08) |
 | `tumor_bed_pt22.csv` | Tumor bed annotation for Pt-22 (Notebook 07) |
 | `tumor_bed_pt24.csv` | Tumor bed annotation for Pt-24 (Notebook 07) |
-| `trrust_rawdata.human.tsv` | TRRUST TF-target database (Notebooks 07, 08) |
+| `trrust_rawdata.human.tsv` | TRRUST TF-target database (Notebook 07) |
 
 ## Conda Environments
 
 | Environment | Notebooks | Key Packages |
 |-------------|-----------|--------------|
 | `bicrc-spatial` | 01–06 | scanpy, squidpy, rapids_singlecell, gseapy, liana, lifelines |
-| `stories-rsc-cuda126` | 07–08 | stories, cellrank, rapids_singlecell, jax, optax |
+| `stories-rsc-cuda126` | 07 | stories, cellrank, rapids_singlecell, jax, optax |
 | `skny` | 09–12 | skny, stlearn, squidpy, gseapy, OpenCV |
 
 ## Key Dependencies
