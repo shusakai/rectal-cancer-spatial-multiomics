@@ -1,0 +1,39 @@
+# Core scientific stack
+numpy>=1.24
+pandas>=1.5
+scipy>=1.10
+matplotlib>=3.7
+seaborn>=0.12
+statsmodels>=0.13
+
+# Single-cell analysis
+anndata>=0.9
+scanpy>=1.9
+
+# Spatial transcriptomics
+squidpy>=1.2
+
+# GPU-accelerated clustering (requires CUDA toolkit)
+# rapids-singlecell>=0.9
+# cupy-cuda11x>=12.0  # Adjust cuda version suffix as needed
+
+# Pathway analysis
+gseapy>=1.0
+
+# Ligand-receptor analysis
+liana>=1.0
+
+# Survival analysis
+lifelines>=0.27
+
+# Machine learning
+scikit-learn>=1.2
+
+# Geometry
+shapely>=2.0
+
+# Statistical annotation for plots
+statannotations>=0.6
+
+# Progress bars
+tqdm

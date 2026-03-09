@@ -1,0 +1,43 @@
+name: bicrc-spatial
+channels:
+  - conda-forge
+  - bioconda
+  - rapidsai
+  - nvidia
+  - defaults
+
+dependencies:
+  - python=3.10
+  - cudatoolkit=11.8  # Adjust to match your GPU driver version
+  - pip
+
+  # Core scientific stack
+  - numpy>=1.24
+  - pandas>=1.5
+  - scipy>=1.10
+  - matplotlib>=3.7
+  - seaborn>=0.12
+  - statsmodels>=0.13
+
+  # Single-cell analysis
+  - anndata>=0.9
+  - scanpy>=1.9
+
+  # Spatial analysis
+  - squidpy>=1.2
+
+  # Machine learning
+  - scikit-learn>=1.2
+
+  # Geometry
+  - shapely>=2.0
+
+  # Survival analysis
+  - pip:
+    - lifelines>=0.27
+    - gseapy>=1.0
+    - liana>=1.0
+    - rapids-singlecell>=0.9  # GPU-accelerated single-cell (requires CUDA)
+    - cupy-cuda11x>=12.0      # Adjust cuda version suffix to match toolkit
+    - statannotations>=0.6
+    - tqdm
