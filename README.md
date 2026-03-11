@@ -2,6 +2,8 @@
 
 Code repository for: *Single-cell spatial multiomics identifies POSTN+ CAFs mediating chemoradiotherapy resistance in rectal cancer*
 
+![Graphical Abstract](images/ST25c108b_v3.png)
+
 Analysis of 24 rectal cancer patients using 10x Xenium spatial transcriptomics. This repository contains reproducible notebooks for the complete analytical pipeline, from initial cell type annotation through survival analysis.
 
 ## Cohort

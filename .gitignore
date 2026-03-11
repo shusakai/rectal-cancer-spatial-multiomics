@@ -59,3 +59,5 @@ secrets.txt
 !data/.gitkeep
 !figures/.gitkeep
 !results/.gitkeep
+!images/
+!images/*.png
